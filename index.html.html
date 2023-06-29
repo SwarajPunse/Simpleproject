@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>User Login</title>
+    <script src="jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#userid").blur(function(){
+                
+                var url="http://localhost:9000/check?uid="+$("#userid").val();
+                alert(url);
+                $.get(url,function(data,status){
+                    if(status=="success")
+                    {
+                        $("#userresult").html(data);
+                        if(data=="userid not available")
+                        {
+                            $("#userid").val("");
+                            $("#userid").focus();
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+    
+</head>
+<body>
+    <form name="f1">
+        Enter userid:
+        <input type="text" name="uid" id="userid"/><span id="userresult"></span>
+        <br/>
+        Enter password:
+        <input type="text" name="pwd" id="pswd"/>
+        <br/>
+        <input type="button" id="greet"/>
+    </form>
+    
+</body>
+</html>
